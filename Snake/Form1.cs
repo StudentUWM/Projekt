@@ -60,6 +60,32 @@ namespace Snake
             food.X = random.Next(0, maxXPos); //losowanie od zera do max rozmiaru okienka wzgledem szerokosci
             food.Y = random.Next(0, maxYPos); //losowanie od zera do max rozmiaru okienka wzgledem wysokosci
         }
+        //ta metoda bedzie sprawdzala naciskane klawisze
+        private void UpdateScreen(object sender, EventArgs e)
+        {
+            //Sprawdzanie czy gra jeszcze trwa
+            if(Settings.GameOver == true)
+            {
+                //Sprawdzanie czy ENTER zostal nacisniety
+                if(Input.KeyPressed(Keys.Enter))
+                {
+                    StartGame();
+                }
+            }
+            else
+            {   //Zmiana kierunku ruchu weza  w zaleznosci ktora ze strzalek nacisniemy i jezeli waz idzie w lewo i nacisniemy prawa strzalke to zeby nie mogl tak skrecic itd
+                if (Input.KeyPressed(Keys.Right) && Settings.direction != Direction.Left)
+                    Settings.direction = Direction.Right;
+                else if(Input.KeyPressed(Keys.Left) && Settings.direction != Direction.Right)
+                    Settings.direction = Direction.Left;
+                else if (Input.KeyPressed(Keys.Up) && Settings.direction != Direction.Down)
+                    Settings.direction = Direction.Up;
+                else if (Input.KeyPressed(Keys.Down) && Settings.direction != Direction.Up)
+                    Settings.direction = Direction.Down;
+
+            }
+
+        }
         private void pbCanvas_Click(object sender, EventArgs e)
         {
 
