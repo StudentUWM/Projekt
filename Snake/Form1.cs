@@ -83,12 +83,43 @@ namespace Snake
                 else if (Input.KeyPressed(Keys.Down) && Settings.direction != Direction.Up)
                     Settings.direction = Direction.Down;
 
+                MovePlayer();
             }
-
+            pbCanvas.Invalidate(); //jezeli cos nacisniemy bo pbCanvas zostanie zaktualizowany
         }
         private void pbCanvas_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void pbCanvas_Paint(object sender, PaintEventArgs e)
+        {
+            // Stworzenie iluzji ruchu weza, ostatnie kolko jest kasowane i jednoczesnie jest dodawane na jego poczatku
+            Graphics canvas = e.Graphics;
+            //Sprawdzenie czy gra jeszcze trwa
+            if(Settings.GameOver != false)
+            {
+                 //Kolor weza
+                Brush snakeColour;
+                //Rysowanie weza
+                for(int i = 0; i<Snake.Count; i++)
+                {
+                    //Rysowanie glowy
+                    if (i == 0)
+                        snakeColour = Brushes.DarkMagenta;
+                    else
+                        snakeColour = Brushes.DarkSeaGreen; // reszta ciala
+                    //Rysowanie weza
+                    canvas.FillEllipse(snakeColour, new Rectangle(Snake[i].X * Settings.Width, Snake[i].Y * Settings.Height, Settings.Width, Settings.Height));
+
+                }
+
+            }
+            else
+            {
+
+            }
+        }
+
     }
 }
