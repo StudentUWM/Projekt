@@ -43,8 +43,22 @@ namespace Snake
             head.Y = 5;   //__|
             Snake.Add(head);  //mamy teraz stworzonego nowego weza o dlugosci jednego kolka
 
+            lblScore.Text = Settings.Score.ToString();
+            //Rozpoczecie generowania jedzenia
+            GenerateFood();
 
+        }
+        //losowe generowanie jedzenia, musimy znac maksymalny rozmiar obszaru gry 
+        private void GenerateFood()
+        {
+            int maxXPos = pbCanvas.Size.Width / Settings.Width;
+            int maxYPos = pbCanvas.Size.Height / Settings.Height;
 
+            //zadeklarowanie random objectu
+            Random random = new Random();
+            food = new Circle();
+            food.X = random.Next(0, maxXPos); //losowanie od zera do max rozmiaru okienka wzgledem szerokosci
+            food.Y = random.Next(0, maxYPos); //losowanie od zera do max rozmiaru okienka wzgledem wysokosci
         }
         private void pbCanvas_Click(object sender, EventArgs e)
         {
