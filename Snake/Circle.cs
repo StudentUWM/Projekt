@@ -10,7 +10,7 @@ namespace Snake
     {
         public int X { get; set; }
         public int Y { get; set; }
-        public Circle()
+        public Circle() //konstruktor
         {
             X = 0;
             Y = 0;
