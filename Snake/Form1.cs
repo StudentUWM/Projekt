@@ -25,7 +25,7 @@ namespace Snake
             new Settings();
             //Zainicjonowanie szybkosci gry i stopera
             gameTimer.Interval = 1000 / Settings.Speed; // 1000ms
-            gameTimer.Tick += UpdateScreen();
+            gameTimer.Tick += UpdateScreen;
             gameTimer.Start();
             //Rozpoczecie nowej gry 
             StartGame();
@@ -98,7 +98,7 @@ namespace Snake
             // Stworzenie iluzji ruchu weza, ostatnie kolko jest kasowane i jednoczesnie jest dodawane na jego poczatku
             Graphics canvas = e.Graphics;
             //Sprawdzenie czy gra jeszcze trwa
-            if(Settings.GameOver != false)
+            if(!Settings.GameOver)
             {
                  //Kolor weza
                 Brush snakeColour;
@@ -187,9 +187,26 @@ namespace Snake
             }
         }
 
+        private void Eat()
+        {
+            Circle food = new Circle();
+            food.X = Snake[Snake.Count - 1].X;
+            food.Y = Snake[Snake.Count - 1].Y;
+        }
+        private void Die()
+        {
+            Settings.GameOver = true;
+        }
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             Input.ChangeState(e.KeyCode, true); // to pozwala ,,zauwazyc" dla aplikacji ze zostal nacisniety klawisz ,, strzalka w dol" 
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+
+            Input.ChangeState(e.KeyCode, false);
         }
 
         
