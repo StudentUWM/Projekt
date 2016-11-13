@@ -36,6 +36,7 @@ namespace Snake
         private void StartGame()
         {
             lblGameOver.Visible = false;
+
             new Settings(); //Ponowne zresetowanie ustawien po to, aby gdy gracz zobaczy ekran koncowy (przegra) i zagra ponownie to wszystkie ustawienia zmienia sie na domyslne
             Snake.Clear(); //Wyczyszczenie ,,kolek" z poprzedniej gry (zeby nie pojawily sie w nowej grze)
             //Tworzenie nowego gracza (weza)
@@ -65,7 +66,7 @@ namespace Snake
         private void UpdateScreen(object sender, EventArgs e)
         {
             //Sprawdzanie czy gra jeszcze trwa
-            if(Settings.GameOver == true)
+            if(Settings.GameOver)
             {
                 //Sprawdzanie czy ENTER zostal nacisniety
                 if(Input.KeyPressed(Keys.Enter))
@@ -88,11 +89,7 @@ namespace Snake
             }
             pbCanvas.Invalidate(); //jezeli cos nacisniemy bo pbCanvas zostanie zaktualizowany
         }
-        private void pbCanvas_Click(object sender, EventArgs e)
-        {
-
-        }
-
+    
         private void pbCanvas_Paint(object sender, PaintEventArgs e)
         {
             // Stworzenie iluzji ruchu weza, ostatnie kolko jest kasowane i jednoczesnie jest dodawane na jego poczatku
@@ -125,10 +122,7 @@ namespace Snake
             }
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
+    
         private void MovePlayer()
         {
             //przenoszenie kolek
@@ -158,7 +152,7 @@ namespace Snake
                     int maxXPos = pbCanvas.Size.Width / Settings.Width;
                     int maxYPos = pbCanvas.Size.Height / Settings.Height;
                     //Kolizje ze scianami gry 
-                    if (Snake[i].X < 0 || Snake[i].Y < 0 || Snake[i].X >= maxXPos || Snake[i].Y >= maxYPos) ;
+                    if (Snake[i].X < 0 || Snake[i].Y < 0 || Snake[i].X >= maxXPos || Snake[i].Y >= maxYPos)
                     {
                         Die();
                     }
@@ -192,6 +186,14 @@ namespace Snake
             Circle food = new Circle();
             food.X = Snake[Snake.Count - 1].X;
             food.Y = Snake[Snake.Count - 1].Y;
+
+            //dodanie zjedzonego kolka do ciala weza
+            Snake.Add(food);
+            //Zaktualizowanie wyniku
+            Settings.Score += Settings.Points;
+            lblScore.Text = Settings.Score.ToString();
+
+            GenerateFood();
         }
         private void Die()
         {

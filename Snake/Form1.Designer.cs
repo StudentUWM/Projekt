@@ -46,7 +46,6 @@
             this.pbCanvas.Size = new System.Drawing.Size(728, 523);
             this.pbCanvas.TabIndex = 0;
             this.pbCanvas.TabStop = false;
-            this.pbCanvas.Click += new System.EventHandler(this.pbCanvas_Click);
             this.pbCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.pbCanvas_Paint);
             // 
             // label1
@@ -78,7 +77,6 @@
             this.lblGameOver.TabIndex = 3;
             this.lblGameOver.Text = "label2";
             this.lblGameOver.Visible = false;
-            this.lblGameOver.Click += new System.EventHandler(this.label2_Click);
             // 
             // Form1
             // 
