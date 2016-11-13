@@ -35,6 +35,7 @@ namespace Snake
         }
         private void StartGame()
         {
+            lblGameOver.Visible = false;
             new Settings(); //Ponowne zresetowanie ustawien po to, aby gdy gracz zobaczy ekran koncowy (przegra) i zagra ponownie to wszystkie ustawienia zmienia sie na domyslne
             Snake.Clear(); //Wyczyszczenie ,,kolek" z poprzedniej gry (zeby nie pojawily sie w nowej grze)
             //Tworzenie nowego gracza (weza)
@@ -119,9 +120,78 @@ namespace Snake
             else
             {
                 string gameOver = "Game over \n Your final score is: " + Settings.Score +"\nPress Enter to try again";
+                lblGameOver.Text = gameOver;
+                lblGameOver.Visible = true;
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void MovePlayer()
+        {
+            //przenoszenie kolek
+            for(int i = Snake.Count -1; i>=0; i--)
+            {
+                //przenoszenie glowy
+                if(i == 0)
+                {
+                    switch (Settings.direction)
+                    {
+                         //ruch w prawo
+                        case Direction.Right:
+                            Snake[i].X++; //w prawo to o jeden wiecej na ,,osi X"
+                            break;
+                        case Direction.Left:
+                            Snake[i].X--; //w lewo to o jeden mniej na ,,osi X"
+                            break;
+                        case Direction.Up:
+                            Snake[i].Y--; 
+                            break;
+                        case Direction.Down:
+                            Snake[i].Y++; 
+                            break;
+                    }
+                    //Kolizje ze scianami oraz jedzenie kolek
+                    //Okreslenie max X i Y
+                    int maxXPos = pbCanvas.Size.Width / Settings.Width;
+                    int maxYPos = pbCanvas.Size.Height / Settings.Height;
+                    //Kolizje ze scianami gry 
+                    if (Snake[i].X < 0 || Snake[i].Y < 0 || Snake[i].X >= maxXPos || Snake[i].Y >= maxYPos) ;
+                    {
+                        Die();
+                    }
+                    //Kolizje z cialem
+                    for ( int j = 1; j < Snake.Count; j++)
+                    {
+                        if(Snake[i].X == Snake[j].X && Snake[i].Y == Snake[j].Y)
+                        {
+                            Die();
+                        }
+                    }
+                    //Kolizje z jedzeniem
+                    if(Snake[0].X == food.X && Snake[0].Y == food.Y) // Snake[0] - glowa weza
+                    {
+                        Eat();
+                    }
+
+                }//ruch reszty ciala
+                else
+                {
+                    Snake[i].X = Snake[i - 1].X;
+                    Snake[i].Y = Snake[i - 1].Y;
+                }
+
 
             }
         }
 
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            Input.ChangeState(e.KeyCode, true); // to pozwala ,,zauwazyc" dla aplikacji ze zostal nacisniety klawisz ,, strzalka w dol" 
+        }
+
+        
     }
 }
