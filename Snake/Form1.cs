@@ -36,6 +36,7 @@ namespace Snake
         private void StartGame()
         {
             lblGameOver.Visible = false;
+            lblGameExit.Visible = false;
 
             new Settings(); //Ponowne zresetowanie ustawien po to, aby gdy gracz zobaczy ekran koncowy (przegra) i zagra ponownie to wszystkie ustawienia zmienia sie na domyslne
             Snake.Clear(); //Wyczyszczenie ,,kolek" z poprzedniej gry (zeby nie pojawily sie w nowej grze)
@@ -115,10 +116,11 @@ namespace Snake
 
             }
             else
-            {
-                string gameOver = "Game over \n Your final score is: " + Settings.Score +"\nPress Enter to try again";
+            {         
+                string gameOver= "Game over \n Your final score is: " + Settings.Score + "\nPress Enter to try again";
                 lblGameOver.Text = gameOver;
                 lblGameOver.Visible = true;
+                lblGameExit.Visible = true;
             }
         }
 
@@ -210,6 +212,13 @@ namespace Snake
 
             Input.ChangeState(e.KeyCode, false);
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+
 
         
     }

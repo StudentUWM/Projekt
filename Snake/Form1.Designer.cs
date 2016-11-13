@@ -35,12 +35,14 @@
             this.lblScore = new System.Windows.Forms.Label();
             this.gameTimer = new System.Windows.Forms.Timer(this.components);
             this.lblGameOver = new System.Windows.Forms.Label();
+            this.lblGameExit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbCanvas)).BeginInit();
             this.SuspendLayout();
             // 
             // pbCanvas
             // 
             this.pbCanvas.BackColor = System.Drawing.SystemColors.Control;
+            this.pbCanvas.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbCanvas.BackgroundImage")));
             this.pbCanvas.Location = new System.Drawing.Point(376, 73);
             this.pbCanvas.Name = "pbCanvas";
             this.pbCanvas.Size = new System.Drawing.Size(728, 523);
@@ -70,7 +72,9 @@
             // lblGameOver
             // 
             this.lblGameOver.AutoSize = true;
+            this.lblGameOver.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.lblGameOver.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblGameOver.ForeColor = System.Drawing.Color.Orange;
             this.lblGameOver.Location = new System.Drawing.Point(672, 298);
             this.lblGameOver.Name = "lblGameOver";
             this.lblGameOver.Size = new System.Drawing.Size(102, 37);
@@ -78,12 +82,25 @@
             this.lblGameOver.Text = "label2";
             this.lblGameOver.Visible = false;
             // 
+            // lblGameExit
+            // 
+            this.lblGameExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblGameExit.Location = new System.Drawing.Point(944, 538);
+            this.lblGameExit.Name = "lblGameExit";
+            this.lblGameExit.Size = new System.Drawing.Size(139, 40);
+            this.lblGameExit.TabIndex = 4;
+            this.lblGameExit.Text = "Wyście";
+            this.lblGameExit.UseVisualStyleBackColor = true;
+            this.lblGameExit.Visible = false;
+            this.lblGameExit.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1403, 671);
+            this.Controls.Add(this.lblGameExit);
             this.Controls.Add(this.lblGameOver);
             this.Controls.Add(this.lblScore);
             this.Controls.Add(this.label1);
@@ -105,6 +122,7 @@
         private System.Windows.Forms.Label lblScore;
         private System.Windows.Forms.Timer gameTimer;
         private System.Windows.Forms.Label lblGameOver;
+        private System.Windows.Forms.Button lblGameExit;
     }
 }
 

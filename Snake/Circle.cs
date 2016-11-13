@@ -16,4 +16,8 @@ namespace Snake
             Y = 0;
         }
     }
+ //   class HowFoodLooks
+   // {
+//
+ //   }
 }
