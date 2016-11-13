@@ -111,12 +111,14 @@ namespace Snake
                         snakeColour = Brushes.DarkSeaGreen; // reszta ciala
                     //Rysowanie weza
                     canvas.FillEllipse(snakeColour, new Rectangle(Snake[i].X * Settings.Width, Snake[i].Y * Settings.Height, Settings.Width, Settings.Height));
-
+                    //rysowanie jedzenia
+                    canvas.FillEllipse(Brushes.Red, new Rectangle(food.X * Settings.Width, food.Y * Settings.Height, Settings.Width,Settings.Height));
                 }
 
             }
             else
             {
+                string gameOver = "Game over \n Your final score is: " + Settings.Score +"\nPress Enter to try again";
 
             }
         }
